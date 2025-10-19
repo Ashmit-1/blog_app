@@ -1,5 +1,8 @@
 body{
     background-color: black;
-    color: aliceblue;
+    color: antiquewhite;
     font-family: Arial, Helvetica, sans-serif;
+}
+h1{
+    text-align: center;
 }
