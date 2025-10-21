@@ -1,13 +1,115 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Create Post{% endblock %}
 {% block content %}
-<h1>Write a blog article</h1>
-<form method="post" enctype="multipart/form-data">
+
+{% comment %} <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{form}}
     <button type="submit" class="btn btn-success ms-3">
         {% if form.instance.pk %}Edit {% else %}Create{% endif %}
     </button>
     <a class="btn btn-info m-3" href="{% url "blog" %}" role="button">Cancel</a>
-</form>
+</form> {% endcomment %}
+
+
+<div class="container">
+   <main>
+      <div class="py-5 text-center">
+         <img class="d-block mx-auto mb-4" src="{% static "blog_create.png" %}" alt="" width="75" height="80"> 
+         <h1 class="h2">Create a post</h1>
+         <p class="lead">Your ideas matter—share your voice with the world. Upload your post now and inspire others with your unique perspective. Let your story be heard!</p>
+      </div>
+      <div class="row g-5 justify-content-center">
+         
+         <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3">Write the blog</h4>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                
+                <div class="row g-3">
+
+                   {% if form.non_field_errors %}
+                       {% for error in form.non_field_errors %}
+                           <div class="text-danger small mb-3">{{ error }}</div>
+                       {% endfor %}
+                   {% endif %}
+
+                <div class="mb-3 col-12">
+                    <label for="{{ form.content.id_for_label }}" class="form-label">Content</label>
+                    <textarea 
+                        name = "{{ form.content.name }}"
+                        class="form-control" 
+                        id="{{ form.content.id_for_label }}" 
+                        rows="3" 
+                        placeholder=""
+                        required>{{ form.content.value|default_if_none:'' }}</textarea>
+
+                    {% if form.content.errors %}
+                        <div class="text-danger small">{{ form.content.errors.0 }}</div>
+                    {% endif %}
+
+                </div>
+
+                <div class="mb-3 col-12">
+                    <label for="{{ form.thumbnail.id_for_label }}" class="form-label">Upload thumbnail (Optional)</label>
+
+
+                    <input 
+                        class="form-control" 
+                        name = "{{ form.thumbnail.name }}"
+                        type="file" 
+                        id="{{ form.thumbnail.id_for_label }}"
+                        value="{{ form.thumbnail.value|default_if_none:'' }}"
+                        accept="image/*">
+
+                    {% if form.instance.thumbnail %}
+                    
+                        <div class="mt-2">
+                            <p>Current:
+                                <img src="{{ form.instance.thumbnail.url }}" alt="Current image" class="img-thumbnail" style="max-width: 200px;">
+                            </p>
+                        </div>
+
+                        <div class="form-check mb-2">
+                            <input 
+                                class="form-check-input" 
+                                type="checkbox" 
+                                name="{{ form.thumbnail.name }}-clear" 
+                                id="{{ form.thumbnail.name }}-clear_id">
+                            <label class="form-check-label" for="{{ form.thumbnail.name }}-clear_id">
+                                Clear existing image
+                            </label>
+                        </div>
+                    {% endif %}
+
+                    {% if form.thumbnail.errors %}
+                        <div class="text-danger small">{{ form.thumbnail.errors.0 }}</div>
+                    {% endif %}
+                    
+                </div>
+
+               <hr class="my-4">
+
+               <div class="form-check"> 
+                    <input type="checkbox" class="form-check-input" id="save-info" required> <label class="form-check-label" for="save-info">I hereby allow this to be published in the web.</label> 
+                </div>
+               <hr class="my-4">
+
+                <div class="d-flex flex-wrap gap-2">
+                    <button class="flex-grow-1 btn btn-success btn-lg" type="submit">
+                        {% if form.instance.pk %}Edit{% else %}Publish Blog{% endif %}
+                    </button>
+                    <a href="{% url "blog" %}" class="flex-grow-1 btn btn-info btn-lg">Return</a>
+                </div>
+
+
+            </form>
+         </div>
+      </div>
+   </main>
+</div>
+
+
 {% endblock %}
