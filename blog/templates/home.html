@@ -1,6 +1,25 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<h1 class="p-3 text-center"><u>This is the our home page</u></h1>
-<p class="p-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore rerum ex corporis, ipsum consequuntur dolorum deleniti blanditiis perferendis aspernatur inventore asperiores eius dolores amet dicta quam cupiditate omnis quo fugiat?</p>
+
+<div class="px-4 py-5 my-5 text-center " >
+     <img class="d-block mx-auto mb-4" src="{% static "icons.png" %}" alt="" width="72" height="57"> 
+     <h1 class="display-5 fw-bold text-body-emphasis ">Welcome to the Blog Hub</h1> 
+     <div class="col-lg-6 mx-auto"> 
+        <p class="lead mb-4  ">Welcome to blog hub — a space where creativity meets insight. Explore thoughtfully written articles, storytelling, and ideas that inspire. Whether you're here for personal growth, professional development, or just a good read, I'm glad you're here. Let's dive in and discover something new together. Start reading now and be part of the journey.</p> 
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center"> 
+
+            <a class="nav-link" href="{% url "blog" %}">
+                <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">See Blogs</button> 
+            </a>
+            <a class="nav-link" href="{% url "create_post" %}">
+                <button type="button" class="btn btn-outline-light btn-lg px-4">Write a blog</button> 
+            </a>
+        </div> 
+    </div> 
+</div>
+
+
+
 {% endblock %}
