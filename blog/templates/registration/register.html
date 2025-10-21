@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+
+{% comment %} <form method="post" class="m-4">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="btn btn-primary">Register</button>
+    <a class="btn btn-primary m-4" href="{% url "login" %}" role="button">Already have an account ? </a>
+</form> {% endcomment %}
+
+
+<div class="container col-xl-10 col-xxl-8 px-4 py-5"> 
+    <div class="row align-items-center g-lg-5 py-5"> 
+        <div class="col-lg-7 text-center text-lg-start"> 
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Register to write blogs and reach to the world</h1> 
+            <p class="col-lg-10 fs-4">Join us and become part of an exciting community of thinkers, writers, and readers. Register today to share your ideas, discover new perspectives, and grow with us. Your journey starts here!</p> 
+        </div> 
+        <div class="col-md-10 mx-auto col-lg-5"> 
+            <form method="post" class="p-4 p-md-5 border rounded-3 bg-body-tertiary"> 
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <div class="text-danger small mb-3">{{ error }}</div>
+                    {% endfor %}
+                {% endif %}
+
+                <div class="form-floating mb-3"> 
+                    <input 
+                    type="text" 
+                    name="{{ form.username.name }}" 
+                    id="{{ form.username.id_for_label}}" 
+                    class="form-control"  
+                    required="" 
+                    autofocus = ""
+                    placeholder=""  
+                    value="{{ form.username.value|default_if_none:'' }}"> 
+
+                    <label for="{{ form.username.id_for_label }}">Username</label>
+
+                    {% if form.username.errors %}
+                        <div class="text-danger small">{{ form.username.errors.0 }}</div>
+                    {% endif %}
+                </div> 
+
+                <div class="form-floating mb-3"> 
+                    <input 
+                    type="email" 
+                    name="{{ form.email.name }}" 
+                    class="form-control" 
+                    id="{{ form.email.id_for_label}}" 
+                    required="" 
+                    placeholder="" 
+                    value="{{ form.email.value|default_if_none:'' }}"> 
+                    <label for="{{ form.email.id_for_label }}">Email</label>
+
+                    {% if form.email.errors %}
+                        <div class="text-danger small">{{ form.email.errors.0 }}</div>
+                    {% endif %}                    
+                </div>
+
+                <div class="form-floating mb-3"> 
+                    <input 
+                    type="password" 
+                    name="{{ form.password1.name }}" 
+                    class="form-control" 
+                    id="{{ form.password1.id_for_label}}" 
+                    required="" 
+                    placeholder="" 
+                    value="{{ form.password1.value|default_if_none:'' }}"> 
+                    <label for="{{ form.password1.id_for_label }}">Password</label>
+
+                    {% if form.password1.errors %}
+                        <div class="text-danger small">{{ form.password1.errors.0 }}</div>
+                    {% endif %}                    
+                </div> 
+
+                <div class="form-floating mb-3"> 
+                    <input 
+                    type="password" 
+                    name="{{ form.password2.name }}" 
+                    class="form-control" 
+                    id="{{ form.password2.id_for_label}}" 
+                    required="" 
+                    placeholder="" 
+                    value="{{ form.password2.value|default_if_none:'' }}"> 
+                    <label for="{{ form.password2.id_for_label }}">Confirm</label>
+
+                    {% if form.password2.errors %}
+                        <div class="text-danger small">{{ form.password2.errors.0 }}</div>
+                    {% endif %}                    
+                </div> 
+
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button> 
+                <hr class="my-4"> 
+                <a class="text-center " href="{% url "login" %}" role="button">Already have an account ? </a>
+                <br>
+                <small class="text-body-secondary ">By clicking Sign up, you agree to the terms of use.</small> 
+            </form> 
+        </div> 
+    </div> 
+</div>
+
+{% endblock %}
