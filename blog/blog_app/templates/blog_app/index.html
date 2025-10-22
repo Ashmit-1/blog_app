@@ -23,7 +23,11 @@
             <div class="col-md-8">
               <div class="card-body">
                 <h5 class="card-title">{{blog.user}}</h5>
-                <p class="card-text">{{blog.content}}</p>
+                {% if blog.content|length > 18 %}
+                  <p class="card-text">{{ blog.content|slice:":15" }}......</p>
+                {% else %}
+                  <p class="card-text">{{ blog.content }}</p>
+                {% endif %}
                 <p class="card-text"><small class="text-body-secondary">{{blog.created_on}}</small></p>
                 {% if blog.user == user %}
                   <a class="btn btn-primary" href="{% url "edit_post" blog.id %}" role="button">Edit</a>
