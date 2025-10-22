@@ -24,9 +24,9 @@
 <body data-bs-theme="dark" class="finisher-header" style="height:100%; min-height:100vh">
     <div >
 
-        <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary " >
+        <nav class="navbar sticky-top navbar-expand-lg bg-black " >
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url "home" %}">Blogged</a>
+                <a class="navbar-brand" href="{% url "home" %}">Blog Hub</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -51,7 +51,7 @@
                 </form>
                 {% else %}
                     <a class="btn btn-info me-2" href="{% url "login" %}">Login</a>
-                    <a class="btn btn-warning " href="{% url "register" %}">Register</a>
+                    <a class="btn btn-warning me-2" href="{% url "register" %}">Register</a>
                 {% endif %}
             </div>
         </nav>
